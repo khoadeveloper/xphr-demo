@@ -15,6 +15,11 @@ Demo project for xpHR
 - How security works: https://github.com/khoadeveloper/xphr-demo/blob/main/security.md
 - How to use the report: https://github.com/khoadeveloper/xphr-demo/blob/main/usage.md
 
+## Database
+Download a backup version of working database here: https://drive.google.com/file/d/19eep_P0RXsG2_yuAwDLvCEI8MOmwcCs-/view?usp=sharing
+
+Import using `pg_restore` tool.
+
 ## Test Coverage
 <img width="1326" height="470" alt="image" src="https://github.com/user-attachments/assets/8c2d76e9-c64b-45ec-82ff-61da5056159c" />
 
