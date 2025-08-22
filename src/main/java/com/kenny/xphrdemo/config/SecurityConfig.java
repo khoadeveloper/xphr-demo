@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
 
-        UserDetails employee = User.withUsername("employee")
+        UserDetails employee = User.withUsername("employee1")
                 .password(encoder.encode("123456789"))  // <-- Encode the password
                 .roles("EMPLOYEE")
                 .build();
