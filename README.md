@@ -35,3 +35,8 @@ Copy the `xphr-demo.war` from target directory to your `${TOMCAT_DIR}/webapps`
 Run this script to bring up the application `${TOMCAT_DIR}/bin/catalina.bat run`
 
 You can access the application from http://localhost:8080/xphr-demo
+
+## References
+- https://www.geeksforgeeks.org/installation-guide/how-to-install-apache-tomcat-on-windows/
+- https://www.digitalocean.com/community/tutorials/install-tomcat-on-linux
+- https://www.postgresql.org/docs/current/tutorial-install.html
