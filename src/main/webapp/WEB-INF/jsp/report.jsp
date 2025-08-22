@@ -10,13 +10,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom container">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a href="/xphr-demo" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-4">xpHR</span>
     </a>
 
     <ul class="nav">
         <li class="nav-item">Hello, ${user} &nbsp;&nbsp;</li>
-        <li class="nav-item"><a href="/logout">Logout</a></li>
+        <li class="nav-item"><a href="/xphr-demo/logout">Logout</a></li>
     </ul>
 </header>
 <div class="container">
@@ -25,7 +25,7 @@
             <h1>REPORT</h1>
         </div>
     </div>
-    <form:form action="/report" method="GET" modelAttribute="request" class="row g-3 align-items-center">
+    <form:form action="/xphr-demo/report" method="GET" modelAttribute="request" class="row g-3 align-items-center">
         <div class="col-auto">
             <label for="from" class="col-form-label">From</label>
         </div>
@@ -76,19 +76,19 @@
                 <nav>
                     <ul class="pagination">
                         <c:if test="${page > 2}">
-                            <li class="page-item"><a class="page-link" href="/report?page=1&from=${request.from}&to=${request.to}">1</a></li>
+                            <li class="page-item"><a class="page-link" href="/xphr-demo/report?page=1&from=${request.from}&to=${request.to}">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">...</a></li>
                         </c:if>
                         <c:if test="${page > 1}">
-                            <li class="page-item"><a class="page-link" href="/report?page=${page - 1}&from=${request.from}&to=${request.to}">${page - 1}</a></li>
+                            <li class="page-item"><a class="page-link" href="/xphr-demo/report?page=${page - 1}&from=${request.from}&to=${request.to}">${page - 1}</a></li>
                         </c:if>
                         <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
                         <c:if test="${page < maxPage}">
-                            <li class="page-item"><a class="page-link" href="/report?page=${page + 1}&from=${request.from}&to=${request.to}">${page + 1}</a></li>
+                            <li class="page-item"><a class="page-link" href="/xphr-demo/report?page=${page + 1}&from=${request.from}&to=${request.to}">${page + 1}</a></li>
                         </c:if>
                         <c:if test="${page < (maxPage - 1)}">
                             <li class="page-item"><a class="page-link" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="/report?page=${maxPage}&from=${request.from}&to=${request.to}">${maxPage}</a></li>
+                            <li class="page-item"><a class="page-link" href="/xphr-demo/report?page=${maxPage}&from=${request.from}&to=${request.to}">${maxPage}</a></li>
                         </c:if>
                     </ul>
                 </nav>
