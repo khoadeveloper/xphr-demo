@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: xphr-demo
+  datasource:
+    username: postgres
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/staff
