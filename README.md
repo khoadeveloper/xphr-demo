@@ -13,7 +13,7 @@ Demo project for xpHR
 
 - Query analisys:
 - How security works: https://github.com/khoadeveloper/xphr-demo/blob/main/security.md
-- How to use the report:
+- How to use the report: https://github.com/khoadeveloper/xphr-demo/blob/main/usage.md
 
 ## Test Coverage
 <img width="1326" height="470" alt="image" src="https://github.com/user-attachments/assets/8c2d76e9-c64b-45ec-82ff-61da5056159c" />
