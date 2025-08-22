@@ -11,7 +11,7 @@ Demo project for xpHR
 - DataGrid
 ## Documents
 
-- Query analisys:
+- Query analisys: https://github.com/khoadeveloper/xphr-demo/blob/main/analysis.md
 - How security works: https://github.com/khoadeveloper/xphr-demo/blob/main/security.md
 - How to use the report: https://github.com/khoadeveloper/xphr-demo/blob/main/usage.md
 
