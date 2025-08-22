@@ -1,11 +1,15 @@
 package com.kenny.xphrdemo.controller;
 
+import com.kenny.xphrdemo.dto.ReportRequestDTO;
 import com.kenny.xphrdemo.service.ReportService;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -33,11 +37,32 @@ public class ReportController {
 
     @GetMapping("")
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
-    public ModelAndView report(Principal principal) {
+    public ModelAndView report(Principal principal,
+                               @ModelAttribute(name = "request") ReportRequestDTO request,
+                               @RequestParam(defaultValue = "1") Integer page,
+                               @RequestParam(defaultValue = "50") Integer size) {
         ModelAndView mv = new ModelAndView("report");
         mv.getModel().put("user", principal.getName());
 
-        reportService.populateReport(mv, principal.getName());
+        LocalDateTime fromDate;
+        LocalDateTime toDate;
+
+        if (StringUtils.isBlank(request.getFrom())) {
+            fromDate = LocalDateTime.now().minusYears(1);
+        } else {
+            fromDate = LocalDateTime.parse(request.getFrom(), DTF);
+        }
+
+        if (StringUtils.isBlank(request.getTo())) {
+            toDate = LocalDateTime.now();
+        } else {
+            toDate = LocalDateTime.parse(request.getTo(), DTF);
+        }
+
+        LocalDateTime[] result = this.validateRange(mv, fromDate, toDate);
+
+        mv.getModel().put("request", new ReportRequestDTO(DTF.format(result[0]), DTF.format(result[1])));
+        reportService.populateReport(mv, principal.getName(), page, size, fromDate, toDate);
         return mv;
     }
 }

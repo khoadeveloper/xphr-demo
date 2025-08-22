@@ -3,33 +3,41 @@ package com.kenny.xphrdemo.service;
 import com.kenny.xphrdemo.repository.TimeRecordRepository;
 import com.kenny.xphrdemo.repository.projections.Report;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class ReportService {
 
+    private static final int MAX_PAGE_SIZE = 200;
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private TimeRecordRepository timeRecordRepository;
 
-    public void populateReport(ModelAndView mav, String user) {
+    public void populateReport(ModelAndView mav, String user, int page, int size,
+                               LocalDateTime fromDate, LocalDateTime toDate) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(user);
 
-        List<Report> pageData;
-        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-            pageData = timeRecordRepository.getReports( null);
-        } else {
-            pageData = timeRecordRepository.getReports(user);
-        }
-        mav.getModel().put("report", pageData);
+        PageRequest pageRequest = PageRequest.of(page - 1, Math.min(size, MAX_PAGE_SIZE));
+        mav.getModel().put("page", page);
 
-        mav.getModel().put("maxPage", pageData);
+        Page<Report> pageData;
+        if (userDetails.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+            pageData = timeRecordRepository.getReports(fromDate, toDate, null, pageRequest);
+        } else {
+            pageData = timeRecordRepository.getReports(fromDate, toDate, user, pageRequest);
+        }
+        mav.getModel().put("report", pageData.getContent());
+
+        mav.getModel().put("maxPage", pageData.getTotalPages());
     }
 }

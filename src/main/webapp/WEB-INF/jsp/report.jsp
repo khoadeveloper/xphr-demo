@@ -15,7 +15,8 @@
     </a>
 
     <ul class="nav">
-        <li class="nav-item">Hello, ${user}</li>
+        <li class="nav-item">Hello, ${user} &nbsp;&nbsp;</li>
+        <li class="nav-item"><a href="/logout">Logout</a></li>
     </ul>
 </header>
 <div class="container">
@@ -24,6 +25,28 @@
             <h1>REPORT</h1>
         </div>
     </div>
+    <form:form action="/report" method="GET" modelAttribute="request" class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="from" class="col-form-label">From</label>
+        </div>
+        <div class="col-auto">
+            <form:input path="from" value="${from}" type="datetime-local" class="form-control"/>
+        </div>
+        <div class="col-auto">
+            <label for="to" class="col-form-label">From</label>
+        </div>
+        <div class="col-auto">
+            <form:input path="to" value="${to}" type="datetime-local" class="form-control"/>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" id="search">Search</button>
+        </div>
+        <c:if test="${error != null}">
+            <div class="col-auto">
+                <span class="text-danger">${error}</span>
+            </div>
+        </c:if>
+    </form:form>
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
@@ -47,6 +70,28 @@
                     </c:forEach>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="pagination float-right">
+                <nav>
+                    <ul class="pagination">
+                        <c:if test="${page > 2}">
+                            <li class="page-item"><a class="page-link" href="/report?page=1&from=${request.from}&to=${request.to}">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        </c:if>
+                        <c:if test="${page > 1}">
+                            <li class="page-item"><a class="page-link" href="/report?page=${page - 1}&from=${request.from}&to=${request.to}">${page - 1}</a></li>
+                        </c:if>
+                        <li class="page-item active"><a class="page-link" href="#">${page}</a></li>
+                        <c:if test="${page < maxPage}">
+                            <li class="page-item"><a class="page-link" href="/report?page=${page + 1}&from=${request.from}&to=${request.to}">${page + 1}</a></li>
+                        </c:if>
+                        <c:if test="${page < (maxPage - 1)}">
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="/report?page=${maxPage}&from=${request.from}&to=${request.to}">${maxPage}</a></li>
+                        </c:if>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
