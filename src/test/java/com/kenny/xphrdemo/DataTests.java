@@ -6,6 +6,7 @@ import com.kenny.xphrdemo.entity.TimeRecord;
 import com.kenny.xphrdemo.repository.EmployeeRepository;
 import com.kenny.xphrdemo.repository.ProjectRepository;
 import com.kenny.xphrdemo.repository.TimeRecordRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +35,7 @@ public class DataTests {
      * and not a real functional test case
      */
     @Test
+    @Disabled
     public void populateData() {
         timeRecordRepository.deleteAll();
         projectRepository.deleteAll();

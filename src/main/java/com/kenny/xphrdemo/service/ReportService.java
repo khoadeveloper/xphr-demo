@@ -11,17 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class ReportService {
 
     private static final int MAX_PAGE_SIZE = 200;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    private final TimeRecordRepository timeRecordRepository;
 
     @Autowired
-    private TimeRecordRepository timeRecordRepository;
+    public ReportService(UserDetailsService userDetailsService, TimeRecordRepository timeRecordRepository) {
+        this.userDetailsService = userDetailsService;
+        this.timeRecordRepository = timeRecordRepository;
+    }
 
     public void populateReport(ModelAndView mav, String user, int page, int size,
                                LocalDateTime fromDate, LocalDateTime toDate) {

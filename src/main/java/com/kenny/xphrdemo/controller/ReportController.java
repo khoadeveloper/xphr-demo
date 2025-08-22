@@ -21,10 +21,14 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/report")
 public class ReportController {
 
-    @Autowired
-    private ReportService reportService;
+    private final ReportService reportService;
 
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+    @Autowired
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
 
     private LocalDateTime[] validateRange(ModelAndView mav, LocalDateTime from, LocalDateTime to) {
         if (Duration.between(from, to).toDays() > 731) {
